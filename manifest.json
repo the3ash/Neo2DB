@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "neo2DB",
+  "name": "Neo2DB",
   "version": "1.0",
   "description": "Auto-fill Douban Music submission from NeoDB.",
   "icons": {
