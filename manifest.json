@@ -7,7 +7,11 @@
     "128": "icons/icon128.png"
   },
   "permissions": ["activeTab", "scripting", "storage", "webNavigation"],
-  "host_permissions": ["https://neodb.social/*", "https://music.douban.com/*"],
+  "host_permissions": [
+    "https://neodb.social/*",
+    "https://music.douban.com/*",
+    "https://movie.douban.com/*"
+  ],
   "background": {
     "service_worker": "background.js"
   },
@@ -15,7 +19,8 @@
     {
       "matches": [
         "https://neodb.social/album/*",
-        "https://music.douban.com/subject/*"
+        "https://music.douban.com/subject/*",
+        "https://movie.douban.com/subject/*"
       ],
       "js": ["content.js"]
     }

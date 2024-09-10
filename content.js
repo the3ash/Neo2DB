@@ -85,10 +85,12 @@ if (window.location.hostname === "neodb.social") {
   }
 }
 
-// Douban Music page Btn
+// Douban Music & Movie page Btn
 if (
-  window.location.hostname === "music.douban.com" &&
-  window.location.pathname.startsWith("/subject/")
+  (window.location.hostname === "music.douban.com" &&
+    window.location.pathname.startsWith("/subject/")) ||
+  (window.location.hostname === "movie.douban.com" &&
+    window.location.pathname.startsWith("/subject/"))
 ) {
   const sideBar = document.querySelector(".aside");
   if (sideBar) {
@@ -233,7 +235,7 @@ if (
 `;
     searchButton.innerHTML = svgIcon;
     searchButton.href = "#";
-    searchButton.style.marginTop = "20px";
+    searchButton.style.marginTop = "40px";
     searchButton.style.backgroundColor = "#FFFFFF";
     searchButton.style.border = "1px solid #ddd";
     searchButton.style.borderRadius = "6px";
