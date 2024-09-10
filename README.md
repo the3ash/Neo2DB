@@ -5,7 +5,7 @@
 &nbsp;
 
 # Neo2DB
-Fill NeoDB music album details into Douban music entry submission form with one click.
+Auto-fill Douban Music submission from NeoDB and quick search NeoDB from Douban Music.
 
  ## Installation
 1. Download and unzip the package.
@@ -13,7 +13,8 @@ Fill NeoDB music album details into Douban music entry submission form with one 
 3. Click "Developer mode" and drag the unzipped folder to the page.
 
 ## Usage
-Click the green 豆 button beside the album cover on the NeoDB album page. It will fill the album details into the Douban music entry submission form, and download the album cover at the same time.
+1. Click the green 豆 button beside the album cover on the NeoDB album page. It will fill the album details into the Douban music entry submission form, and download the album cover at the same time.
+2. Click the button with the NeoDB logo at the bottom of the right bar of the Douban album page. It will search the album on NeoDB.
 
 ## License
 MIT

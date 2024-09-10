@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Neo2DB",
-  "version": "1.0",
-  "description": "Auto-fill Douban Music submission from NeoDB.",
+  "version": "1.1",
+  "description": "Auto-fill Douban Music submission from NeoDB and quick search NeoDB from Douban Music.",
   "icons": {
     "128": "icons/icon128.png"
   },
@@ -13,7 +13,10 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://neodb.social/album/*"],
+      "matches": [
+        "https://neodb.social/album/*",
+        "https://music.douban.com/subject/*"
+      ],
       "js": ["content.js"]
     }
   ]

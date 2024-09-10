@@ -1,3 +1,4 @@
+// Add from NeoDB
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === "fillDoubanForm") {
     const { albumData } = message;
@@ -61,6 +62,42 @@ function fillRemainingForm() {
         albumData.external_resources[0].url;
 
       chrome.storage.local.remove("pendingAlbumData");
+    }
+  });
+}
+
+// Search from Douban
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+  if (
+    changeInfo.status === "complete" &&
+    tab.url.startsWith("https://neodb.social/")
+  ) {
+    chrome.scripting.executeScript({
+      target: { tabId: tabId },
+      function: autoFillNeoDBSearchUpdated,
+    });
+  }
+});
+
+function autoFillNeoDBSearchUpdated() {
+  // Get Douban URL from chrome.storage
+  chrome.storage.local.get(["doubanUrl"], (result) => {
+    const doubanUrl = result.doubanUrl;
+
+    if (doubanUrl) {
+      const searchInput = document.getElementById("q");
+      const searchForm = document.querySelector('form[role="search"]');
+
+      if (searchInput) {
+        searchInput.value = doubanUrl;
+        searchInput.dispatchEvent(new Event("input", { bubbles: true }));
+      }
+
+      if (searchForm) {
+        searchForm.submit();
+      }
+
+      chrome.storage.local.remove("doubanUrl");
     }
   });
 }
