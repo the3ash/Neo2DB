@@ -94,8 +94,8 @@ if (
   (window.location.hostname === "book.douban.com" &&
     window.location.pathname.startsWith("/subject/"))
 ) {
-  const sideBar = document.querySelector(".aside");
-  if (sideBar) {
+  const wrapper = document.querySelector("#wrapper");
+  if (wrapper) {
     const searchButton = document.createElement("a");
     const svgIcon = `
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
@@ -235,12 +235,16 @@ if (
   </g>
 </svg>
 `;
+    wrapper.style.position = "relative";
+    searchButton.style.position = "absolute";
+    searchButton.style.top = "-2px";
+    searchButton.style.right = "0";
     searchButton.innerHTML = svgIcon;
     searchButton.href = "#";
-    searchButton.style.marginTop = "40px";
     searchButton.style.backgroundColor = "#FFFFFF";
     searchButton.style.border = "1px solid #ddd";
     searchButton.style.borderRadius = "6px";
+    searchButton.style.width = "300px";
     searchButton.style.height = "32px";
     searchButton.style.textAlign = "center";
     searchButton.style.display = "flex";
@@ -258,6 +262,6 @@ if (
       });
     });
 
-    sideBar.appendChild(searchButton);
+    wrapper.appendChild(searchButton);
   }
 }
