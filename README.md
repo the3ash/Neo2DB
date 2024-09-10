@@ -14,7 +14,7 @@ Auto-fill Douban Music submission from NeoDB and quick search NeoDB from Douban 
 
 ## Usage
 1. Click the green 豆 button beside the album cover on the NeoDB album page. It will fill the album details into the Douban music entry submission form, and download the album cover at the same time.
-2. Click the button with the NeoDB logo at the bottom of the right bar of the Douban Music/Movie page. It will search the album/movie on NeoDB.
+2. Click the button with the 🧩NeoDB logo at the bottom of the right bar of the Douban Music/Movie page. It will search the album/movie on NeoDB.
 
 ## License
 MIT
