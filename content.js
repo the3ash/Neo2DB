@@ -90,6 +90,8 @@ if (
   (window.location.hostname === "music.douban.com" &&
     window.location.pathname.startsWith("/subject/")) ||
   (window.location.hostname === "movie.douban.com" &&
+    window.location.pathname.startsWith("/subject/")) ||
+  (window.location.hostname === "book.douban.com" &&
     window.location.pathname.startsWith("/subject/"))
 ) {
   const sideBar = document.querySelector(".aside");
