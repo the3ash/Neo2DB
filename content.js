@@ -87,12 +87,10 @@ if (window.location.hostname === "neodb.social") {
 
 // Douban Music & Movie page Btn
 if (
-  (window.location.hostname === "music.douban.com" &&
-    window.location.pathname.startsWith("/subject/")) ||
-  (window.location.hostname === "movie.douban.com" &&
-    window.location.pathname.startsWith("/subject/")) ||
-  (window.location.hostname === "book.douban.com" &&
-    window.location.pathname.startsWith("/subject/"))
+  (window.location.hostname === "music.douban.com" ||
+    window.location.hostname === "movie.douban.com" ||
+    window.location.hostname === "book.douban.com") &&
+  /^\/subject\/\d+\/?$/.test(window.location.pathname)
 ) {
   const wrapper = document.querySelector("#wrapper");
   if (wrapper) {
