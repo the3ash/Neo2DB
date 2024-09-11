@@ -252,12 +252,8 @@ if (
     searchButton.addEventListener("click", (e) => {
       e.preventDefault();
       const currentUrl = window.location.href;
-
-      // Save Douban URL to chrome.storage
-      chrome.storage.local.set({ doubanUrl: currentUrl }, () => {
-        const neodbSearchUrl = "https://neodb.social/";
-        window.open(neodbSearchUrl, "_blank");
-      });
+      const neodbSearchUrl = `https://neodb.social/search?q=${currentUrl}`;
+      window.open(neodbSearchUrl, "_blank");
     });
 
     wrapper.appendChild(searchButton);
