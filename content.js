@@ -1,5 +1,5 @@
 // NeoDB Page Btn
-if (window.location.hostname === "neodb.social") {
+if (window.location.href.startsWith("https://neodb.social/album/")) {
   const box = document.getElementById("item-cover");
   box.style.position = "relative";
   const button = document.createElement("button");
