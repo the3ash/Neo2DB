@@ -5,7 +5,7 @@
 &nbsp;
 
 # Neo2DB
-Auto-fill Douban Music submissions from NeoDB, and quickly search NeoDB directly from Douban.
+Auto-fill Douban Music submissions from NeoDB, and quickly search between Douban and NeoDB with direct page navigation.
 
  ## Installation
 1. Download and unzip the package.
