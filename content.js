@@ -42,7 +42,7 @@ if (
   });
 }
 
-// NeoDB Album Page Add Btn
+// NeoDB Album Page Create Btn
 if (window.location.href.startsWith("https://neodb.social/album/")) {
   const box = document.getElementById("item-cover");
   box.style.position = "relative";
@@ -116,7 +116,7 @@ if (window.location.href.startsWith("https://neodb.social/album/")) {
   }
 }
 
-// Douban Music & Movie page Btn
+// Douban Page Seach Btn
 if (
   (window.location.hostname === "music.douban.com" ||
     window.location.hostname === "movie.douban.com" ||
