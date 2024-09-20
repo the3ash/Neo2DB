@@ -6,29 +6,29 @@ if (
 ) {
   const box = document.getElementById("item-cover");
   box.style.position = "relative";
-  const button2 = document.createElement("button");
+  const SearchBtn = document.createElement("button");
   const svgIcon2 = `<svg width="20" height="20" viewBox="0 0 28 28" fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg">
 <path d="M6.989 15.9303V9.40883H21.05V14H18.565V11.083H9.475V14.2363H15V15.9303H10.7578L11.842 20.305H15V21.999H5V20.306H9.336L8.3311 15.9303H6.989Z" "/>
 <path d="M5.556 7.695V6H22.463V7.69401H5.557L5.556 7.695Z" "/>
 <path fill-rule="evenodd" clip-rule="evenodd" d="M24.4749 16.818C25.9892 18.3323 26.1986 20.6574 25.1031 22.396L26.5962 23.8891L25.182 25.3033L23.6889 23.8102C21.9503 24.9057 19.6252 24.6963 18.1109 23.182C16.3536 21.4246 16.3536 18.5754 18.1109 16.818C19.8683 15.0607 22.7175 15.0607 24.4749 16.818ZM23.0633 21.7651C24.037 20.7886 24.0361 19.2077 23.0607 18.2322C22.0843 17.2559 20.5014 17.2559 19.5251 18.2322C18.5488 19.2085 18.5488 20.7915 19.5251 21.7678C20.5006 22.7432 22.0815 22.7441 23.058 21.7704L23.0633 21.7651Z" "/>
 </svg>
 `;
-  button2.innerHTML = svgIcon2;
-  button2.style.backgroundColor = "green";
-  button2.style.width = "28px";
-  button2.style.height = "28px";
-  button2.style.borderRadius = "6px";
-  button2.style.padding = "0";
-  button2.style.border = "none";
-  button2.style.position = "absolute";
-  button2.style.top = "-64px";
-  button2.style.left = "0";
-  button2.style.display = "flex";
-  button2.style.alignItems = "center";
-  button2.style.justifyContent = "center";
-  box.appendChild(button2);
+  SearchBtn.innerHTML = svgIcon2;
+  SearchBtn.style.backgroundColor = "green";
+  SearchBtn.style.width = "28px";
+  SearchBtn.style.height = "28px";
+  SearchBtn.style.borderRadius = "6px";
+  SearchBtn.style.padding = "0";
+  SearchBtn.style.border = "none";
+  SearchBtn.style.position = "absolute";
+  SearchBtn.style.top = "-64px";
+  SearchBtn.style.left = "0";
+  SearchBtn.style.display = "flex";
+  SearchBtn.style.alignItems = "center";
+  SearchBtn.style.justifyContent = "center";
+  box.appendChild(SearchBtn);
 
-  button2.addEventListener("click", (e) => {
+  SearchBtn.addEventListener("click", (e) => {
     e.preventDefault();
     const Album_Title = document.querySelector("#item-title h1").innerText;
 
@@ -47,29 +47,29 @@ if (window.location.href.startsWith("https://neodb.social/album/")) {
   const box = document.getElementById("item-cover");
   box.style.position = "relative";
 
-  const button1 = document.createElement("button");
+  const CreateBtn = document.createElement("button");
   const svgIcon1 = `
   <svg width="20" height="20" viewBox="0 0 28 28" fill="#008000" xmlns="http://www.w3.org/2000/svg">
   <path d="M6.989 15.9303V9.40883H21.05V14H18.565V11.083H9.475V14.2363H15V15.9303H10.7578L11.842 20.305H15V21.999H5V20.306H9.336L8.3311 15.9303H6.989Z" "/>
   <path d="M5.556 7.695V6H22.463V7.69401L5.556 7.695Z" "/>
   <path d="M23 15V19H27V21H23V25H21V21H17V19H21V15H23Z" "/>
   </svg>`;
-  button1.innerHTML = svgIcon1;
-  button1.style.backgroundColor = "#E2ECE2";
-  button1.style.width = "28px";
-  button1.style.height = "28px";
-  button1.style.borderRadius = "6px";
-  button1.style.padding = "0";
-  button1.style.border = "none";
-  button1.style.position = "absolute";
-  button1.style.top = "-64px";
-  button1.style.left = "36px";
-  button1.style.display = "flex";
-  button1.style.alignItems = "center";
-  button1.style.justifyContent = "center";
-  box.appendChild(button1);
+  CreateBtn.innerHTML = svgIcon1;
+  CreateBtn.style.backgroundColor = "#E2ECE2";
+  CreateBtn.style.width = "28px";
+  CreateBtn.style.height = "28px";
+  CreateBtn.style.borderRadius = "6px";
+  CreateBtn.style.padding = "0";
+  CreateBtn.style.border = "none";
+  CreateBtn.style.position = "absolute";
+  CreateBtn.style.top = "-64px";
+  CreateBtn.style.left = "36px";
+  CreateBtn.style.display = "flex";
+  CreateBtn.style.alignItems = "center";
+  CreateBtn.style.justifyContent = "center";
+  box.appendChild(CreateBtn);
 
-  button1.addEventListener("click", async () => {
+  CreateBtn.addEventListener("click", async () => {
     const albumId = window.location.pathname.split("/").pop();
 
     try {
