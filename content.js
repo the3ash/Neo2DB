@@ -30,14 +30,15 @@ if (
 
   SearchBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    const Album_Title = document.querySelector("#item-title h1").innerText;
+    const h1 = document.querySelector("#item-title h1");
+    const ItemTitle = h1.firstChild.textContent.trim();
 
     const url = window.location.href;
     const match = url.match(/\/([a-zA-Z]+)\//);
-    const category =
+    const Category =
       match[1] === "tv" ? "movie" : match[1] === "album" ? "music" : match[1];
 
-    const doubanSearchUrl = `https://search.douban.com/${category}/subject_search?search_text=${Album_Title}`;
+    const doubanSearchUrl = `https://search.douban.com/${Category}/subject_search?search_text=${ItemTitle}`;
     window.open(doubanSearchUrl, "_blank");
   });
 }
