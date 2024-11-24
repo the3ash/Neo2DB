@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "Neo2DB",
+  "version": "1.4.5",
+  "description": "Auto-fill Douban Music submissions from NeoDB, and quickly search between Douban and NeoDB with direct page navigation.",
+  "icons": {
+    "128": "icons/icon128.png"
+  },
+  "permissions": ["activeTab", "scripting", "storage", "webNavigation"],
+  "host_permissions": [
+    "https://neodb.social/*",
+    "https://music.douban.com/*",
+    "https://movie.douban.com/*",
+    "https://book.douban.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://neodb.social/*",
+        "https://music.douban.com/subject/*",
+        "https://movie.douban.com/subject/*",
+        "https://book.douban.com/subject/*"
+      ],
+      "js": ["content.js"]
+    }
+  ]
+}
