@@ -34,12 +34,19 @@ if (
     const h1 = document.querySelector("#item-title h1");
     const ItemTitle = h1.firstChild.textContent.trim();
 
+    const artistSpan = document.querySelector(
+      "#item-metadata > section > div:nth-child(2) span span"
+    );
+    const ItemArtist = artistSpan ? artistSpan.textContent.trim() : "";
+
     const url = window.location.href;
     const match = url.match(/\/([a-zA-Z]+)\//);
     const Category =
       match[1] === "tv" ? "movie" : match[1] === "album" ? "music" : match[1];
-
-    const doubanSearchUrl = `https://search.douban.com/${Category}/subject_search?search_text=${ItemTitle}`;
+    const searchQuery = `${ItemTitle} ${ItemArtist} `;
+    const doubanSearchUrl = `https://search.douban.com/${Category}/subject_search?search_text=${encodeURIComponent(
+      searchQuery
+    )}`;
     window.open(doubanSearchUrl, "_blank");
   });
 }
