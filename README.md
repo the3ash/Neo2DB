@@ -12,8 +12,11 @@ Auto-fill Douban Music submissions from NeoDB, and quickly search between Douban
 ## Installation
 
 1. Clone and extract this project
-2. Find the `AccessToken` variable in the `entrypoints/content.tsx` file and fill in your NeoDB Access Token
-   - Visit https://neodb.social/developer/ to get an Access Token
+2. Set up your NeoDB Access Token:
+   - Open `entrypoints/content.tsx`
+   - Find the `AccessToken` variable
+   - Replace `YOUR_NEODB_ACCESS_TOKEN` with your token from https://neodb.social/developer/
+   - Note: Just replace the token part, keep the "Bearer " prefix
 3. Install dependencies and build the extension:
    ```bash
    pnpm install

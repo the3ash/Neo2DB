@@ -4,11 +4,11 @@ import CreateButton from "../src/components/CreateButton";
 import NeoDBLogo from "../src/components/NeoDBLogo";
 import { AlbumData } from "../src/types";
 
-// You need to fill in your own Access Token below
-// 1. Visit https://neodb.social/developer/ and login with your account
-// 2. Create a new application to get your Access Token
-// 3. Copy the token and paste it below in the format: "Bearer YOUR_TOKEN_HERE"
-const AccessToken = "YOUR_NEODB_ACCESS_TOKEN"; // Replace with your NeoDB Access Token
+// Access Token
+
+const AccessToken = import.meta.env.VITE_NEODB_ACCESS_TOKEN
+  ? `Bearer ${import.meta.env.VITE_NEODB_ACCESS_TOKEN}`
+  : `Bearer YOUR_NEODB_ACCESS_TOKEN`; // Replace YOUR_NEODB_ACCESS_TOKEN with your token from https://neodb.social/developer/
 
 export default defineContentScript({
   matches: [
