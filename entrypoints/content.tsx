@@ -116,7 +116,11 @@ function handleSearchButtonClick(e: React.MouseEvent<HTMLButtonElement>) {
   if (match) {
     const Category =
       match[1] === "tv" ? "movie" : match[1] === "album" ? "music" : match[1];
-    const searchQuery = `${ItemTitle} ${ItemArtist} `;
+
+    // Only include artist for music/album searches
+    const searchQuery =
+      match[1] === "album" ? `${ItemTitle} ${ItemArtist}` : `${ItemTitle}`;
+
     const doubanSearchUrl = `https://search.douban.com/${Category}/subject_search?search_text=${encodeURIComponent(
       searchQuery
     )}`;
