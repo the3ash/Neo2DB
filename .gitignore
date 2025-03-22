@@ -25,3 +25,7 @@ dist-ssr
 
 .output
 .wxt
+
+.env
+.env.local
+.env.*.local
