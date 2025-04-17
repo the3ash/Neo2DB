@@ -2,12 +2,13 @@
 
 <p align="center">
   <img src="./public/icon/128.png" alt="Neo2DB Logo">
+  <h1 align="center">Neo2DB</h1>
 </p>
-&nbsp;
 
-# Neo2DB
-
-Auto-fill Douban Music submissions from NeoDB, and quickly search between Douban and NeoDB with direct page navigation.
+  <p align="center">
+    Auto-fill Douban Music submissions from NeoDB<br>
+    Quickly search between Douban and NeoDB with direct page navigation
+  </p>
 
 ## Installation
 
@@ -39,6 +40,8 @@ Auto-fill Douban Music submissions from NeoDB, and quickly search between Douban
 
 3. On Douban music/movie/book pages, click the NeoDB logo button at the top of the right sidebar:
    - Search for the corresponding entry on NeoDB
+
+  <img src="./public/screenshot.png" alt="screenshot">
 
 ## License
 
