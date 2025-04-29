@@ -1,46 +1,58 @@
 import { AlbumData } from "../src/types";
 
+// Helper function to log messages only in development mode
+const isDev = process.env.NODE_ENV !== "production";
+function devLog(...args: any[]) {
+  if (isDev) {
+    console.log(...args);
+  }
+}
+
 export default defineBackground(() => {
-  console.log("Neo2DB background script started");
+  devLog("Neo2DB background script started");
 
   // Handle messages from content script
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    console.log("Background received message:", message.action);
+    devLog("Background received message:", message.action);
 
     if (message.action === "fillDoubanForm") {
       const { albumData } = message;
 
       // Store album data and open Douban form
       chrome.storage.local.set({ pendingAlbumData: albumData }, () => {
-        console.log("Album data stored:", albumData.title);
+        devLog("Album data stored:", albumData.title);
         chrome.tabs.create(
           { url: "https://music.douban.com/new_subject" },
           (tab) => {
-            console.log(
-              "Tab created with ID:",
-              tab?.id,
-              "- Waiting for page load"
-            );
+            devLog("Tab created with ID:", tab?.id, "- Waiting for page load");
             const tabId = tab?.id;
             if (tabId) {
               // Delay execution to ensure DOM is fully loaded
               setTimeout(() => {
-                console.log(
+                devLog(
                   "Initial delay complete, checking page state before filling form"
                 );
                 chrome.scripting.executeScript(
                   {
                     target: { tabId },
                     func: function () {
-                      console.log("Page readyState:", document.readyState);
-                      console.log("Page URL:", window.location.href);
-                      console.log("Document title:", document.title);
+                      // Pass the isDev flag to the executed script
+                      const isDev = process.env.NODE_ENV !== "production";
+                      function devLog(...args: any[]) {
+                        if (isDev) {
+                          console.log(...args);
+                        }
+                      }
+
+                      devLog("Page readyState:", document.readyState);
+                      devLog("Page URL:", window.location.href);
+                      devLog("Document title:", document.title);
                       const titleInput = document.querySelector(
                         'input[name="p_title"]'
                       );
                       const btnLink = document.querySelector(".btn-link");
-                      console.log("Title input found:", !!titleInput);
-                      console.log("Button link found:", !!btnLink);
+                      devLog("Title input found:", !!titleInput);
+                      devLog("Button link found:", !!btnLink);
                       return {
                         readyState: document.readyState,
                         elementsFound: !!titleInput && !!btnLink,
@@ -49,7 +61,7 @@ export default defineBackground(() => {
                   },
                   (results) => {
                     if (results && results[0] && results[0].result) {
-                      console.log("Page check results:", results[0].result);
+                      devLog("Page check results:", results[0].result);
                       chrome.scripting.executeScript({
                         target: { tabId },
                         func: fillInitialForm,
@@ -74,26 +86,32 @@ export default defineBackground(() => {
   // Listen for page navigation events to detect form expansion
   chrome.webNavigation.onCompleted.addListener((details) => {
     if (details.url.startsWith("https://music.douban.com/new_subject")) {
-      console.log("Navigation completed event detected for URL:", details.url);
+      devLog("Navigation completed event detected for URL:", details.url);
 
       const tabId = details.tabId;
       if (typeof tabId === "number") {
         // Skip if form was already filled for this tab
         if (formFilledTabs.has(tabId)) {
-          console.log("Tab", tabId, "already had form filled, skipping");
+          devLog("Tab", tabId, "already had form filled, skipping");
           return;
         }
 
         // Delay to ensure page is fully loaded
         setTimeout(() => {
-          console.log("About to check form state on tabId:", tabId);
+          devLog("About to check form state on tabId:", tabId);
           chrome.scripting.executeScript(
             {
               target: { tabId },
               func: function () {
-                console.log(
-                  "Checking form state before filling remaining form"
-                );
+                // Pass the isDev flag to the executed script
+                const isDev = process.env.NODE_ENV !== "production";
+                function devLog(...args: any[]) {
+                  if (isDev) {
+                    console.log(...args);
+                  }
+                }
+
+                devLog("Checking form state before filling remaining form");
                 const artistInput = document.getElementById("p_48_0");
                 const otherInputs = {
                   company: !!document.querySelector('input[name="p_50"]'),
@@ -102,8 +120,8 @@ export default defineBackground(() => {
                     'textarea[name="p_52_other"]'
                   ),
                 };
-                console.log("Artist input found:", !!artistInput);
-                console.log("Other form inputs:", otherInputs);
+                devLog("Artist input found:", !!artistInput);
+                devLog("Other form inputs:", otherInputs);
                 return {
                   artistInput: !!artistInput,
                   otherInputs,
@@ -113,7 +131,7 @@ export default defineBackground(() => {
             },
             (results) => {
               if (results && results[0] && results[0].result) {
-                console.log("Form state check results:", results[0].result);
+                devLog("Form state check results:", results[0].result);
                 const formState = results[0].result;
                 if (formState.artistInput) {
                   // Mark tab as filled
@@ -136,7 +154,15 @@ export default defineBackground(() => {
 
 // Function to fill initial form with title and click expand button
 function fillInitialForm() {
-  console.log("Executing fillInitialForm");
+  // Pass the isDev flag to the executed script
+  const isDev = process.env.NODE_ENV !== "production";
+  function devLog(...args: any[]) {
+    if (isDev) {
+      console.log(...args);
+    }
+  }
+
+  devLog("Executing fillInitialForm");
   chrome.storage.local.get(["pendingAlbumData"], (result) => {
     const albumData = result.pendingAlbumData;
     if (albumData) {
@@ -146,9 +172,9 @@ function fillInitialForm() {
       const btnLink = document.querySelector(".btn-link") as HTMLElement;
 
       if (titleInput && btnLink) {
-        console.log("Form elements found, setting title:", albumData.title);
+        devLog("Form elements found, setting title:", albumData.title);
         titleInput.value = albumData.title;
-        console.log("Clicking button to proceed");
+        devLog("Clicking button to proceed");
         btnLink.click();
       } else {
         console.error("Form elements not found!");
@@ -159,7 +185,15 @@ function fillInitialForm() {
 
 // Function to fill all remaining form fields after expansion
 function fillRemainingForm() {
-  console.log("Executing fillRemainingForm");
+  // Pass the isDev flag to the executed script
+  const isDev = process.env.NODE_ENV !== "production";
+  function devLog(...args: any[]) {
+    if (isDev) {
+      console.log(...args);
+    }
+  }
+
+  devLog("Executing fillRemainingForm");
   chrome.storage.local.get(["pendingAlbumData"], (result) => {
     const albumData = result.pendingAlbumData as AlbumData;
     if (albumData) {
@@ -246,7 +280,7 @@ function fillRemainingForm() {
         }
       }
 
-      console.log(
+      devLog(
         `Form filling completed: found ${fieldsFound}/${fieldsTotal} fields`
       );
       chrome.storage.local.remove("pendingAlbumData");
