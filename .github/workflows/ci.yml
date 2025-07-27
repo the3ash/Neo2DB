@@ -119,9 +119,21 @@ jobs:
 
       - name: Auto merge
         if: steps.wait-for-checks.outputs.conclusion == 'success'
-        uses: pascalgn/merge-action@v0.15.3
+        uses: actions/github-script@v7
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          merge_method: squash
-          merge_commit_title: ${{ github.event.pull_request.title }}
-          merge_commit_message: ${{ github.event.pull_request.body }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { data: pullRequest } = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number
+            });
+
+            await github.rest.pulls.merge({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+              merge_method: 'squash',
+              commit_title: pullRequest.title,
+              commit_message: pullRequest.body || ''
+            });
