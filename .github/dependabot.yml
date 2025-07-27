@@ -10,7 +10,7 @@ updates:
     allow:
       - dependency-type: "all"
     assignees:
-      - "3ash"
+      - "the3ash"
     commit-message:
       prefix: "deps"
       prefix-development: "dev"
@@ -24,7 +24,7 @@ updates:
       interval: "weekly"
     open-pull-requests-limit: 10
     assignees:
-      - "3ash"
+      - "the3ash"
     commit-message:
       prefix: "github-actions"
       include: "scope"
