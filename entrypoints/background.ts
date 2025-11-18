@@ -164,7 +164,7 @@ function fillInitialForm() {
 
   devLog("Executing fillInitialForm");
   chrome.storage.local.get(["pendingAlbumData"], (result) => {
-    const albumData = result.pendingAlbumData;
+    const albumData = result.pendingAlbumData as AlbumData;
     if (albumData) {
       const titleInput = document.querySelector(
         'input[name="p_title"]'
