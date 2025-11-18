@@ -12,7 +12,7 @@ const SearchButton: React.FC<SearchButtonProps> = ({ onClick }) => {
         backgroundColor: "green",
         width: "28px",
         height: "28px",
-        borderRadius: "6px",
+        borderRadius: "8px",
         padding: 0,
         border: "none",
         position: "absolute",
@@ -24,8 +24,8 @@ const SearchButton: React.FC<SearchButtonProps> = ({ onClick }) => {
       }}
     >
       <svg
-        width="20"
-        height="20"
+        width="18"
+        height="18"
         viewBox="0 0 28 28"
         fill="#FFFFFF"
         xmlns="http://www.w3.org/2000/svg"

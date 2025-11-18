@@ -69,7 +69,7 @@ export default defineContentScript({
         searchButton.href = "#";
         searchButton.style.backgroundColor = "#FFFFFF";
         searchButton.style.border = "1px solid #EBEBEB";
-        searchButton.style.borderRadius = "6px";
+        searchButton.style.borderRadius = "9px";
         searchButton.style.width = "300px";
         searchButton.style.height = "32px";
         searchButton.style.textAlign = "center";

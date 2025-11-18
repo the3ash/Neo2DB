@@ -12,7 +12,7 @@ const CreateButton: React.FC<CreateButtonProps> = ({ onClick }) => {
         backgroundColor: "#E2ECE2",
         width: "28px",
         height: "28px",
-        borderRadius: "6px",
+        borderRadius: "8px",
         padding: 0,
         border: "none",
         position: "absolute",
@@ -24,8 +24,8 @@ const CreateButton: React.FC<CreateButtonProps> = ({ onClick }) => {
       }}
     >
       <svg
-        width="20"
-        height="20"
+        width="18"
+        height="18"
         viewBox="0 0 28 28"
         fill="#008000"
         xmlns="http://www.w3.org/2000/svg"
