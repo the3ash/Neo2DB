@@ -3,6 +3,7 @@ import SearchButton from '../src/components/SearchButton';
 import CreateButton from '../src/components/CreateButton';
 import NeoDBLogo from '../src/components/NeoDBLogo';
 import { AlbumData } from '../src/types';
+import '../src/content.css';
 
 // Access Token
 
@@ -26,7 +27,7 @@ export default defineContentScript({
     ) {
       const box = document.getElementById('item-cover');
       if (box) {
-        box.style.position = 'relative';
+        box.classList.add('neo2db-cover-container');
 
         // Create a container to render React components
         const searchButtonContainer = document.createElement('div');
@@ -61,38 +62,14 @@ export default defineContentScript({
     ) {
       const wrapper = document.querySelector('#wrapper') as HTMLElement;
       if (wrapper) {
+        wrapper.classList.add('neo2db-douban-wrapper');
         const searchButton = document.createElement('a');
-        wrapper.style.position = 'relative';
-        searchButton.style.position = 'absolute';
-        searchButton.style.top = '-2px';
-        searchButton.style.right = '0';
+        searchButton.classList.add('neo2db-douban-search-btn');
         searchButton.href = '#';
-        searchButton.style.backgroundColor = '#FFFFFF';
-        searchButton.style.border = '1px solid #EBEBEB';
-        searchButton.style.borderRadius = '9px';
-        searchButton.style.width = '300px';
-        searchButton.style.height = '32px';
-        searchButton.style.textAlign = 'center';
-        searchButton.style.display = 'flex';
-        searchButton.style.alignItems = 'center';
-        searchButton.style.justifyContent = 'center';
-        searchButton.style.transition = 'background-color 0.2s ease-out';
-
-        // Add hover effects
-        searchButton.addEventListener('mouseenter', () => {
-          searchButton.style.backgroundColor = '#F7F7F7';
-        });
-        searchButton.addEventListener('mouseleave', () => {
-          searchButton.style.backgroundColor = '#FFFFFF';
-        });
 
         // Create a container for the React component
         const logoContainer = document.createElement('div');
-        logoContainer.style.width = '100%';
-        logoContainer.style.height = '100%';
-        logoContainer.style.display = 'flex';
-        logoContainer.style.alignItems = 'center';
-        logoContainer.style.justifyContent = 'center';
+        logoContainer.classList.add('neo2db-logo-container');
         searchButton.appendChild(logoContainer);
         const logoRoot = createRoot(logoContainer);
         logoRoot.render(<NeoDBLogo />);
