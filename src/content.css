@@ -12,7 +12,8 @@
   right: 0;
   background-color: #ffffff;
   border: 1px solid #ebebeb;
-  border-radius: 9px;
+  border-radius: 18px;
+  corner-shape: squircle;
   width: 300px;
   height: 32px;
   text-align: center;

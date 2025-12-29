@@ -12,22 +12,24 @@ const CreateButton: React.FC<CreateButtonProps> = ({ onClick }) => {
       onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      style={{
-        backgroundColor: isHovered ? '#C8E6C8' : '#E2ECE2',
-        width: '28px',
-        height: '28px',
-        borderRadius: '8px',
-        padding: 0,
-        border: 'none',
-        position: 'absolute',
-        top: '-64px',
-        left: '36px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        transition: 'all 0.15s ease-out',
-        cursor: 'pointer',
-      }}
+      style={
+        {
+          backgroundColor: isHovered ? '#C8E6C8' : '#E2ECE2',
+          width: '32px',
+          height: '32px',
+          borderRadius: '50%',
+          padding: 0,
+          border: 'none',
+          position: 'absolute',
+          top: '-64px',
+          left: '36px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          transition: 'all 0.15s ease-out',
+          cursor: 'pointer',
+        } as React.CSSProperties
+      }
     >
       <svg
         width='18'
