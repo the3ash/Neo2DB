@@ -1,15 +1,38 @@
 import { createRoot } from 'react-dom/client'
 import SearchButton from '../src/components/SearchButton'
 import CreateButton from '../src/components/CreateButton'
-import NeoDBLogo from '../src/components/NeoDBLogo'
+import NeoDBIcon from '../src/components/NeoDBIcon'
 import { AlbumData } from '../src/types'
 import '../src/content.css'
 
 // Access Token
-
 const AccessToken = import.meta.env.VITE_NEODB_ACCESS_TOKEN
   ? `Bearer ${import.meta.env.VITE_NEODB_ACCESS_TOKEN}`
-  : `Bearer YOUR_NEODB_ACCESS_TOKEN` // Replace YOUR_NEODB_ACCESS_TOKEN with your token from https://neodb.social/developer/
+  : (() => {
+      console.warn(
+        '[Neo2DB] Access token not configured. Please set VITE_NEODB_ACCESS_TOKEN in your environment. Get your token from https://neodb.social/developer/'
+      )
+      return ''
+    })()
+
+// URL patterns to exclude from NeoDB page handling
+const NEODB_EXCLUDED_PATHS = ['/game/', '/performance/']
+
+// Check if current URL is a valid NeoDB content page
+function isNeoDBContentPage(): boolean {
+  const href = window.location.href
+  if (!href.startsWith('https://neodb.social/')) return false
+  return !NEODB_EXCLUDED_PATHS.some((path) => href.includes(path))
+}
+
+// Check if current URL is a Douban subject page
+function isDoubanSubjectPage(): boolean {
+  const validHosts = ['music.douban.com', 'movie.douban.com', 'book.douban.com']
+  return (
+    validHosts.includes(window.location.hostname) &&
+    /^\/subject\/\d+\/?$/.test(window.location.pathname)
+  )
+}
 
 export default defineContentScript({
   matches: [
@@ -20,11 +43,7 @@ export default defineContentScript({
   ],
   main() {
     // NeoDB Page Search Btn
-    if (
-      window.location.href.startsWith('https://neodb.social/') &&
-      !window.location.href.startsWith('https://neodb.social/game/') &&
-      !window.location.href.startsWith('https://neodb.social/performance/')
-    ) {
+    if (isNeoDBContentPage()) {
       const box = document.getElementById('item-cover')
       if (box) {
         box.classList.add('neo2db-cover-container')
@@ -50,12 +69,7 @@ export default defineContentScript({
     }
 
     // Douban Page Search Btn
-    if (
-      (window.location.hostname === 'music.douban.com' ||
-        window.location.hostname === 'movie.douban.com' ||
-        window.location.hostname === 'book.douban.com') &&
-      /^\/subject\/\d+\/?$/.test(window.location.pathname)
-    ) {
+    if (isDoubanSubjectPage()) {
       const wrapper = document.querySelector('#wrapper') as HTMLElement
       if (wrapper) {
         wrapper.classList.add('neo2db-douban-wrapper')
@@ -68,7 +82,7 @@ export default defineContentScript({
         logoContainer.classList.add('neo2db-logo-container')
         searchButton.appendChild(logoContainer)
         const logoRoot = createRoot(logoContainer)
-        logoRoot.render(<NeoDBLogo />)
+        logoRoot.render(<NeoDBIcon />)
 
         searchButton.addEventListener('click', (e) => {
           e.preventDefault()
@@ -111,55 +125,80 @@ function handleSearchButtonClick(e: React.MouseEvent<HTMLButtonElement>) {
 async function handleCreateButtonClick() {
   const albumId = window.location.pathname.split('/').pop()
 
-  if (albumId) {
+  if (!albumId) return
+
+  if (!AccessToken) {
+    console.warn('[Neo2DB] Access token not configured')
+    return
+  }
+
+  try {
+    const response = await fetch(`https://neodb.social/api/album/${albumId}`, {
+      headers: {
+        Authorization: AccessToken,
+      },
+    })
+
+    if (!response.ok) {
+      console.error(`[Neo2DB] API error: ${response.status}`)
+      return
+    }
+
+    const albumData: AlbumData = await response.json()
+
+    // Download cover image using fetch + blob (handles cross-origin)
+    if (albumData.cover_image_url) {
+      await downloadImage(albumData.cover_image_url, `${albumData.title}_cover.jpg`)
+    } else {
+      console.log('[Neo2DB] No cover image URL found in the album data.')
+    }
+
+    // Send album data to background script
     try {
-      const response = await fetch(`https://neodb.social/api/album/${albumId}`, {
-        headers: {
-          Authorization: AccessToken,
-        },
+      chrome.runtime.sendMessage({
+        action: 'fillDoubanForm',
+        albumData: albumData,
       })
-
-      const albumData: AlbumData = await response.json()
-
-      // Download cover image
-      if (albumData.cover_image_url) {
-        downloadImage(albumData.cover_image_url, `${albumData.title}_cover.jpg`)
-      } else {
-        console.log('No cover image URL found in the album data.')
+    } catch (chromeError) {
+      // Ignore "Extension context invalidated" error
+      if (
+        typeof chromeError === 'object' &&
+        chromeError !== null &&
+        !chromeError.toString().includes('Extension context invalidated')
+      ) {
+        console.error('[Neo2DB] Error sending message:', chromeError)
       }
-
-      // Send album data to background script
-      try {
-        chrome.runtime.sendMessage({
-          action: 'fillDoubanForm',
-          albumData: albumData,
-        })
-      } catch (chromeError) {
-        // Ignore "Extension context invalidated" error
-        if (
-          typeof chromeError === 'object' &&
-          chromeError !== null &&
-          !chromeError.toString().includes('Extension context invalidated')
-        ) {
-          console.error('Error sending message:', chromeError)
-        }
-      }
-    } catch (error) {
-      // If the error is not "Extension context invalidated", display it
-      if (error instanceof Error && !error.message.includes('Extension context invalidated')) {
-        console.error('Failed to fetch album data:', error)
-      }
+    }
+  } catch (error) {
+    // If the error is not "Extension context invalidated", display it
+    if (error instanceof Error && !error.message.includes('Extension context invalidated')) {
+      console.error('[Neo2DB] Failed to fetch album data:', error)
     }
   }
 }
 
-// Download image function
-function downloadImage(url: string, fileName: string) {
-  const a = document.createElement('a')
-  a.style.display = 'none'
-  a.href = url
-  a.download = fileName
-  document.body.appendChild(a)
-  a.click()
-  document.body.removeChild(a)
+// Download image using fetch to handle cross-origin
+async function downloadImage(url: string, fileName: string): Promise<void> {
+  try {
+    const response = await fetch(url)
+    const blob = await response.blob()
+    const blobUrl = URL.createObjectURL(blob)
+
+    const a = document.createElement('a')
+    a.style.display = 'none'
+    a.href = blobUrl
+    a.download = fileName
+    document.body.appendChild(a)
+    a.click()
+
+    // Cleanup
+    setTimeout(() => {
+      URL.revokeObjectURL(blobUrl)
+      a.remove()
+    }, 100)
+  } catch (error) {
+    console.error('[Neo2DB] Failed to download image:', error)
+    // Fallback: open image in new tab
+    window.open(url, '_blank')
+  }
 }
