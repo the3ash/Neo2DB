@@ -29,13 +29,11 @@
 ## Usage
 
 1. On a NeoDB album page, click the ➕ button next to the cover:
-
    - Automatically transfers album information to the Douban Music submission form
    - Automatically downloads the album cover image to your computer
    - Automatically opens the Douban Music submission page and fills in the information
 
 2. On NeoDB album/movie/TV/book pages, click the 🔍 button next to the cover:
-
    - Search for the corresponding entry on Douban
 
 3. On Douban music/movie/book pages, click the NeoDB logo button at the top of the right sidebar:
