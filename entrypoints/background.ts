@@ -58,7 +58,7 @@ export default defineBackground(() => {
   devLog('Background script started')
 
   // Handle messages from content script
-  chrome.runtime.onMessage.addListener((message, _sender, _sendResponse) => {
+  chrome.runtime.onMessage.addListener((message) => {
     devLog('Received message:', message.action)
 
     if (message.action === 'fillDoubanForm') {
