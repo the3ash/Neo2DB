@@ -84,11 +84,17 @@ export default defineContentScript({
         const logoRoot = createRoot(logoContainer)
         logoRoot.render(<NeoDBIcon />)
 
-        searchButton.addEventListener('click', (e) => {
+        const openNeoDBSearch = (e: Event) => {
           e.preventDefault()
           const currentUrl = window.location.href
           const neodbSearchUrl = `https://neodb.social/search?q=${currentUrl}`
           window.open(neodbSearchUrl, '_blank')
+        }
+
+        // Handle click events
+        searchButton.addEventListener('click', openNeoDBSearch)
+        searchButton.addEventListener('auxclick', (e) => {
+          if (e.button === 1) openNeoDBSearch(e)
         })
 
         wrapper.appendChild(searchButton)
