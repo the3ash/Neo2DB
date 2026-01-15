@@ -35,3 +35,35 @@
   align-items: center;
   justify-content: center;
 }
+
+/* IconButton styles */
+.neo2db-icon-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  padding: 0;
+  border: none;
+  position: absolute;
+  top: -64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s ease-out;
+  cursor: pointer;
+}
+
+.neo2db-icon-btn--primary {
+  background-color: green;
+}
+
+.neo2db-icon-btn--primary:hover {
+  background-color: #007100;
+}
+
+.neo2db-icon-btn--secondary {
+  background-color: #e2ece2;
+}
+
+.neo2db-icon-btn--secondary:hover {
+  background-color: #c8e6c8;
+}

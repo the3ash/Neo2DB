@@ -18,6 +18,10 @@ const AccessToken = import.meta.env.VITE_NEODB_ACCESS_TOKEN
 // URL patterns to exclude from NeoDB page handling
 const NEODB_EXCLUDED_PATHS = ['/game/', '/performance/']
 
+// Pre-compiled RegExp patterns for better performance
+const SUBJECT_PATH_REGEX = /^\/subject\/\d+\/?$/
+const CATEGORY_REGEX = /\/([a-zA-Z]+)\//
+
 // Check if current URL is a valid NeoDB content page
 function isNeoDBContentPage(): boolean {
   const href = window.location.href
@@ -30,7 +34,7 @@ function isDoubanSubjectPage(): boolean {
   const validHosts = ['music.douban.com', 'movie.douban.com', 'book.douban.com']
   return (
     validHosts.includes(window.location.hostname) &&
-    /^\/subject\/\d+\/?$/.test(window.location.pathname)
+    SUBJECT_PATH_REGEX.test(window.location.pathname)
   )
 }
 
@@ -113,7 +117,7 @@ function handleSearchButtonClick(e: React.MouseEvent<HTMLButtonElement>) {
   const ItemArtist = artistSpan ? artistSpan.textContent?.trim() || '' : ''
 
   const url = window.location.href
-  const match = url.match(/\/([a-zA-Z]+)\//)
+  const match = url.match(CATEGORY_REGEX)
   if (match) {
     const Category = match[1] === 'tv' ? 'movie' : match[1] === 'album' ? 'music' : match[1]
 
