@@ -14,10 +14,10 @@
 
 1. Clone and extract this project
 2. Set up your NeoDB Access Token:
-   - Open `entrypoints/content.tsx`
-   - Find the `AccessToken` variable
-   - Replace `YOUR_NEODB_ACCESS_TOKEN` with your token from https://neodb.social/developer/
-   - Note: Just replace the token part, keep the "Bearer " prefix
+   ```bash
+   cp .env.example .env.local
+   ```
+   Then edit `.env.local` and replace `your_token_here` with your token from https://neodb.social/developer/
 3. Install dependencies and build the extension:
    ```bash
    pnpm install
