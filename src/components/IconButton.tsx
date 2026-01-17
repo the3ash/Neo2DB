@@ -9,11 +9,7 @@ interface IconButtonProps {
 
 const IconButton: React.FC<IconButtonProps> = ({ onClick, icon, variant, offsetLeft = 0 }) => {
   return (
-    <button
-      onClick={onClick}
-      className={`neo2db-icon-btn neo2db-icon-btn--${variant}`}
-      style={{ left: offsetLeft }}
-    >
+    <button onClick={onClick} className={`neo2db-icon-btn neo2db-icon-btn--${variant}`} style={{ left: offsetLeft }}>
       {icon}
     </button>
   )

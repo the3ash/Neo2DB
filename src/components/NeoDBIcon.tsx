@@ -26,10 +26,7 @@ const NeoDBLogo: React.FC = () => {
       >
         <rect x="86.353256" y="25.158035" width="217.58301" height="60.515274" id="rect4965" />
       </defs>
-      <g
-        id="_WTrHMt3eZfxcQKrYJirRK"
-        transform="matrix(0.95294163,0,0,0.95294163,-45.741197,-190.14988)"
-      >
+      <g id="_WTrHMt3eZfxcQKrYJirRK" transform="matrix(0.95294163,0,0,0.95294163,-45.741197,-190.14988)">
         <path
           id="_1MYZsbAYvxe5D-50H3pho"
           fill="#000000"

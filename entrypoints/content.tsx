@@ -32,10 +32,7 @@ function isNeoDBContentPage(): boolean {
 // Check if current URL is a Douban subject page
 function isDoubanSubjectPage(): boolean {
   const validHosts = ['music.douban.com', 'movie.douban.com', 'book.douban.com']
-  return (
-    validHosts.includes(window.location.hostname) &&
-    SUBJECT_PATH_REGEX.test(window.location.pathname)
-  )
+  return validHosts.includes(window.location.hostname) && SUBJECT_PATH_REGEX.test(window.location.pathname)
 }
 
 export default defineContentScript({

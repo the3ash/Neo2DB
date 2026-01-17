@@ -20,12 +20,7 @@ chrome.tabs.onRemoved.addListener((tabId) => {
 })
 
 // Wait for element to appear using polling (more reliable than fixed timeout)
-function waitForElement(
-  tabId: number,
-  selector: string,
-  maxAttempts = 10,
-  interval = 300
-): Promise<boolean> {
+function waitForElement(tabId: number, selector: string, maxAttempts = 10, interval = 300): Promise<boolean> {
   return new Promise((resolve) => {
     let attempts = 0
 
@@ -195,9 +190,7 @@ function fillRemainingForm() {
     const trackList = albumData.track_list || ''
     if (trackList) {
       fieldsTotal++
-      const trackListInput = document.querySelector(
-        'textarea[name="p_52_other"]'
-      ) as HTMLTextAreaElement
+      const trackListInput = document.querySelector('textarea[name="p_52_other"]') as HTMLTextAreaElement
       if (trackListInput) {
         fieldsFound++
         trackListInput.value = trackList
@@ -208,9 +201,7 @@ function fillRemainingForm() {
     const description = albumData.description || ''
     if (description) {
       fieldsTotal++
-      const descriptionInput = document.querySelector(
-        'textarea[name="p_28_other"]'
-      ) as HTMLTextAreaElement
+      const descriptionInput = document.querySelector('textarea[name="p_28_other"]') as HTMLTextAreaElement
       if (descriptionInput) {
         fieldsFound++
         descriptionInput.value = description
@@ -221,9 +212,7 @@ function fillRemainingForm() {
     const externalUrl = albumData.external_resources?.[0]?.url || ''
     if (externalUrl) {
       fieldsTotal++
-      const externalUrlInput = document.querySelector(
-        'textarea[name="p_152_other"]'
-      ) as HTMLTextAreaElement
+      const externalUrlInput = document.querySelector('textarea[name="p_152_other"]') as HTMLTextAreaElement
       if (externalUrlInput) {
         fieldsFound++
         externalUrlInput.value = externalUrl
