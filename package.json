@@ -7,11 +7,11 @@
   "scripts": {
     "dev": "wxt",
     "dev:firefox": "wxt -b firefox",
-    "build": "pnpm run compile && wxt build",
+    "build": "pnpm run typecheck && wxt build",
     "build:firefox": "wxt build -b firefox",
     "zip": "wxt zip",
     "zip:firefox": "wxt zip -b firefox",
-    "compile": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
     "lint": "oxlint .",
     "lint:fix": "oxlint . --fix",
     "format": "oxfmt --write .",
@@ -29,7 +29,7 @@
     "@wxt-dev/module-react": "^1.2.2",
     "oxfmt": "latest",
     "oxlint": "latest",
-    "typescript": "^5.9.3",
+    "typescript": "^6.0.2",
     "wxt": "^0.20.20"
   }
 }
