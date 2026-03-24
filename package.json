@@ -1,8 +1,8 @@
 {
   "name": "neo2db",
-  "description": "Auto-fill Douban Music submissions from NeoDB, and quickly search between Douban and NeoDB with direct page navigation.",
+  "version": "1.8.1",
   "private": true,
-  "version": "1.8.0",
+  "description": "Auto-fill Douban Music submissions from NeoDB, and quickly search between Douban and NeoDB with direct page navigation.",
   "type": "module",
   "scripts": {
     "dev": "wxt",
@@ -12,8 +12,10 @@
     "zip": "wxt zip",
     "zip:firefox": "wxt zip -b firefox",
     "compile": "tsc --noEmit",
-    "lint": "eslint .",
-    "format": "prettier --write .",
+    "lint": "oxlint .",
+    "lint:fix": "oxlint . --fix",
+    "format": "oxfmt --write .",
+    "format:check": "oxfmt --check .",
     "postinstall": "wxt prepare"
   },
   "dependencies": {
@@ -21,17 +23,13 @@
     "react-dom": "^19.2.4"
   },
   "devDependencies": {
-    "@eslint/js": "^10.0.1",
     "@types/chrome": "^0.1.38",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@wxt-dev/module-react": "^1.2.2",
-    "eslint": "^10.1.0",
-    "eslint-config-prettier": "^10.1.8",
-    "globals": "^17.4.0",
-    "prettier": "^3.8.1",
+    "oxfmt": "latest",
+    "oxlint": "latest",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.57.1",
     "wxt": "^0.20.20"
   }
 }

@@ -10,7 +10,7 @@ const AccessToken = import.meta.env.VITE_NEODB_ACCESS_TOKEN
   ? `Bearer ${import.meta.env.VITE_NEODB_ACCESS_TOKEN}`
   : (() => {
       console.warn(
-        '[Neo2DB] Access token not configured. Please set VITE_NEODB_ACCESS_TOKEN in your environment. Get your token from https://neodb.social/developer/'
+        '[Neo2DB] Access token not configured. Please set VITE_NEODB_ACCESS_TOKEN in your environment. Get your token from https://neodb.social/developer/',
       )
       return ''
     })()
@@ -32,7 +32,17 @@ function isNeoDBContentPage(): boolean {
 // Check if current URL is a Douban subject page
 function isDoubanSubjectPage(): boolean {
   const validHosts = ['music.douban.com', 'movie.douban.com', 'book.douban.com']
-  return validHosts.includes(window.location.hostname) && SUBJECT_PATH_REGEX.test(window.location.pathname)
+  return (
+    validHosts.includes(window.location.hostname) &&
+    SUBJECT_PATH_REGEX.test(window.location.pathname)
+  )
+}
+
+function openNeoDBSearch(event: Event): void {
+  event.preventDefault()
+  const currentUrl = window.location.href
+  const neodbSearchUrl = `https://neodb.social/search?q=${currentUrl}`
+  window.open(neodbSearchUrl, '_blank')
 }
 
 export default defineContentScript({
@@ -85,13 +95,6 @@ export default defineContentScript({
         const logoRoot = createRoot(logoContainer)
         logoRoot.render(<NeoDBIcon />)
 
-        const openNeoDBSearch = (e: Event) => {
-          e.preventDefault()
-          const currentUrl = window.location.href
-          const neodbSearchUrl = `https://neodb.social/search?q=${currentUrl}`
-          window.open(neodbSearchUrl, '_blank')
-        }
-
         // Handle click events
         searchButton.addEventListener('click', openNeoDBSearch)
         searchButton.addEventListener('auxclick', (e) => {
@@ -122,7 +125,7 @@ function handleSearchButtonClick(e: React.MouseEvent<HTMLButtonElement>) {
     const searchQuery = match[1] === 'album' ? `${ItemTitle} ${ItemArtist}` : `${ItemTitle}`
 
     const doubanSearchUrl = `https://search.douban.com/${Category}/subject_search?search_text=${encodeURIComponent(
-      searchQuery
+      searchQuery,
     )}`
     window.open(doubanSearchUrl, '_blank')
   }

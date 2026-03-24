@@ -28,7 +28,7 @@ updates:
         update-types: ['minor', 'patch']
       # Linting & formatting
       code-quality:
-        patterns: ['eslint*', 'prettier*', '@eslint/*', '@typescript-eslint/*', 'typescript-eslint']
+        patterns: ['ox*']
         update-types: ['minor', 'patch']
       # Chrome types
       chrome-types:
