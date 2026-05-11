@@ -2870,6 +2870,9 @@ snapshots:
   '@types/estree@1.0.9':
     optional: true
 
+  '@types/estree@1.0.9':
+    optional: true
+
   '@types/filesystem@0.0.36':
     dependencies:
       '@types/filewriter': 0.0.33
