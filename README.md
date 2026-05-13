@@ -39,7 +39,20 @@
 3. On Douban music/movie/book pages, click the NeoDB logo button at the top of the right sidebar:
    - Search for the corresponding entry on NeoDB
 
-  <img src="./public/screenshot.png" alt="screenshot">
+<table>
+  <tr>
+    <td width="50%">
+      https://github.com/user-attachments/assets/e44100be-0f06-41dc-b3e2-9796ecc20cb1
+    </td>
+    <td width="50%">
+      https://github.com/user-attachments/assets/6ea40539-7f38-4c1d-8e36-13d73329994f
+    </td>
+  </tr>
+  <tr>
+    <td align="center">Auto-fill Douban submissions from NeoDB</td>
+    <td align="center">Search NeoDB from Douban</td>
+  </tr>
+</table>
 
 ## License
 
