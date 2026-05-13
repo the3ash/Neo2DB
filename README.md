@@ -41,11 +41,11 @@
 
 ## Demos
 
-https://github.com/user-attachments/assets/e44100be-0f06-41dc-b3e2-9796ecc20cb1
+https://github.com/user-attachments/assets/41d5d0af-517e-463c-a2d9-dca58d2c9336
 
 <p align="center">Auto-fill Douban submissions from NeoDB</p>
 
-https://github.com/user-attachments/assets/6ea40539-7f38-4c1d-8e36-13d73329994f
+https://github.com/user-attachments/assets/01b99294-43ae-42d3-bc1b-0c382355d9bd
 
 <p align="center">Search NeoDB from Douban</p>
 
