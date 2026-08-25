@@ -1,4 +1,4 @@
-import { AlbumData } from '../src/types'
+import type { AlbumData } from '../src/types'
 
 // Helper function to log messages only in development mode
 const isDev = process.env.NODE_ENV !== 'production'

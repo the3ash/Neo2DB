@@ -2,7 +2,7 @@ import { createRoot } from 'react-dom/client'
 import SearchButton from '../src/components/SearchButton'
 import CreateButton from '../src/components/CreateButton'
 import NeoDBIcon from '../src/components/NeoDBIcon'
-import { AlbumData } from '../src/types'
+import type { AlbumData } from '../src/types'
 import '../src/content.css'
 
 // Access Token
