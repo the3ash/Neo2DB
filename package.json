@@ -7,15 +7,16 @@
   "scripts": {
     "dev": "wxt",
     "dev:firefox": "wxt -b firefox",
-    "build": "pnpm run typecheck && wxt build",
-    "build:firefox": "wxt build -b firefox",
-    "zip": "wxt zip",
-    "zip:firefox": "wxt zip -b firefox",
+    "build": "vp run typecheck && wxt build",
+    "build:firefox": "vp run typecheck && wxt build -b firefox",
+    "zip": "vp run typecheck && wxt zip",
+    "zip:firefox": "vp run typecheck && wxt zip -b firefox",
+    "check": "vp check && vp run typecheck",
     "typecheck": "tsc --noEmit",
-    "lint": "oxlint .",
-    "lint:fix": "oxlint . --fix",
-    "format": "oxfmt --write .",
-    "format:check": "oxfmt --check .",
+    "lint": "vp lint .",
+    "lint:fix": "vp lint . --fix",
+    "format": "vp fmt --write .",
+    "format:check": "vp fmt --check .",
     "postinstall": "wxt prepare"
   },
   "dependencies": {
@@ -27,9 +28,21 @@
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.5",
     "@wxt-dev/module-react": "^1.2.2",
-    "oxfmt": "latest",
-    "oxlint": "latest",
     "typescript": "^7.0.2",
+    "vite": "catalog:",
+    "vite-plus": "catalog:",
     "wxt": "^0.21.4"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.3.4",
+      "onFail": "download"
+    },
+    "runtime": {
+      "name": "node",
+      "version": "24.20.0",
+      "onFail": "download"
+    }
   }
 }
