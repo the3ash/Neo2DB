@@ -22,7 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
 .output
 .wxt
 
@@ -30,3 +29,5 @@ dist-ssr
 .env
 .env.local
 .env.*.local
+
+tmp/
