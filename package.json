@@ -1,6 +1,6 @@
 {
   "name": "neo2db",
-  "version": "1.8.1",
+  "version": "1.8.2",
   "private": true,
   "description": "Auto-fill Douban Music submissions from NeoDB, and quickly search between Douban and NeoDB with direct page navigation.",
   "type": "module",
