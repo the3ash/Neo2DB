@@ -18,33 +18,13 @@
    cp .env.example .env.local
    ```
    Then edit `.env.local` and replace `your_token_here` with your token from https://neodb.social/developer/
-3. Install [Vite+](https://viteplus.dev/guide/), then install dependencies and build the extension. Vite+ manages the Node.js and pnpm versions declared in `package.json` under `devEngines`:
+3. Install dependencies and build the extension:
    ```bash
-   vp install
-   vp run build
+   pnpm install
+   pnpm build
    ```
 4. Open `chrome://extensions/` in your browser and enable Developer Mode
 5. Click "Load unpacked" and select the `.output/chrome-mv3` directory from the project
-
-## Development
-
-WXT manages extension entrypoints, the manifest, React integration, and browser-specific builds in `wxt.config.ts`. Vite+ supplies the Vite engine and the lint/format configuration in `vite.config.ts`.
-
-Use `vp run` to execute the WXT scripts. The built-in `vp dev` and `vp build` commands run Vite directly and do not build this extension.
-
-| Command                | Purpose                                       |
-| ---------------------- | --------------------------------------------- |
-| `vp run dev`           | Start Chrome extension development            |
-| `vp run dev:firefox`   | Start Firefox extension development           |
-| `vp run check`         | Check formatting, lint, and TypeScript types  |
-| `vp run typecheck`     | Run TypeScript checks only                    |
-| `vp fmt`               | Format the project                            |
-| `vp run build`         | Build Chrome MV3 into `.output/chrome-mv3/`   |
-| `vp run build:firefox` | Build Firefox MV2 into `.output/firefox-mv2/` |
-| `vp run zip`           | Build and package the Chrome extension        |
-| `vp run zip:firefox`   | Build and package the Firefox extension       |
-
-`vp run check` combines Vite+'s format/lint checks with `tsc --noEmit`, preserving the existing lint rules and WXT-generated TypeScript configuration. Run `vp install` before checking a fresh checkout so `wxt prepare` generates `.wxt/`.
 
 ## Usage
 
