@@ -3,7 +3,7 @@ allowBuilds:
   spawn-sync: false
 catalog:
   vite: npm:@voidzero-dev/vite-plus-core@0.3.0
-  vite-plus: 0.3.0
+  vite-plus: 0.3.2
 overrides:
   vite@*: 'catalog:'
 peerDependencyRules:
