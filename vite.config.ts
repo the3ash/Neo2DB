@@ -1,7 +1,10 @@
 import { defineConfig } from 'vite-plus'
 
-// WXT owns extension builds in wxt.config.ts; this config owns lint and format.
+// WXT owns extension builds in wxt.config.ts; this config owns tests, lint and format.
 export default defineConfig({
+  test: {
+    include: ['tests/**/*.test.ts'],
+  },
   fmt: {
     semi: false,
     singleQuote: true,
