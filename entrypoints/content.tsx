@@ -3,6 +3,7 @@ import SearchButton from '../src/components/SearchButton'
 import CreateButton from '../src/components/CreateButton'
 import NeoDBIcon from '../src/components/NeoDBIcon'
 import type { AlbumData } from '../src/types'
+import { autoFetchNeoDBItem, buildNeoDBSearchUrl, isDoubanSubjectUrl } from '../src/neodb-search'
 import '../src/content.css'
 
 // Access Token
@@ -19,7 +20,6 @@ const AccessToken = import.meta.env.VITE_NEODB_ACCESS_TOKEN
 const NEODB_EXCLUDED_PATHS = ['/game/', '/performance/']
 
 // Pre-compiled RegExp patterns for better performance
-const SUBJECT_PATH_REGEX = /^\/subject\/\d+\/?$/
 const CATEGORY_REGEX = /\/([a-zA-Z]+)\//
 
 // Check if current URL is a valid NeoDB content page
@@ -29,20 +29,9 @@ function isNeoDBContentPage(): boolean {
   return !NEODB_EXCLUDED_PATHS.some((path) => href.includes(path))
 }
 
-// Check if current URL is a Douban subject page
-function isDoubanSubjectPage(): boolean {
-  const validHosts = ['music.douban.com', 'movie.douban.com', 'book.douban.com']
-  return (
-    validHosts.includes(window.location.hostname) &&
-    SUBJECT_PATH_REGEX.test(window.location.pathname)
-  )
-}
-
 function openNeoDBSearch(event: Event): void {
   event.preventDefault()
-  const currentUrl = window.location.href
-  const neodbSearchUrl = `https://neodb.social/search?q=${currentUrl}`
-  window.open(neodbSearchUrl, '_blank')
+  window.open(buildNeoDBSearchUrl(new URL(window.location.href)), '_blank', 'noopener')
 }
 
 export default defineContentScript({
@@ -52,7 +41,10 @@ export default defineContentScript({
     'https://movie.douban.com/subject/*',
     'https://book.douban.com/subject/*',
   ],
+  runAt: 'document_idle',
   main() {
+    autoFetchNeoDBItem(window)
+
     // NeoDB Page Search Btn
     if (isNeoDBContentPage()) {
       const box = document.getElementById('item-cover')
@@ -80,7 +72,7 @@ export default defineContentScript({
     }
 
     // Douban Page Search Btn
-    if (isDoubanSubjectPage()) {
+    if (isDoubanSubjectUrl(new URL(window.location.href))) {
       const wrapper = document.querySelector('#wrapper') as HTMLElement
       if (wrapper) {
         wrapper.classList.add('neo2db-douban-wrapper')

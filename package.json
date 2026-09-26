@@ -1,6 +1,6 @@
 {
   "name": "neo2db",
-  "version": "1.8.2",
+  "version": "1.8.3",
   "private": true,
   "description": "Auto-fill Douban Music submissions from NeoDB, and quickly search between Douban and NeoDB with direct page navigation.",
   "type": "module",
@@ -17,6 +17,7 @@
     "lint:fix": "vp lint . --fix",
     "format": "vp fmt --write .",
     "format:check": "vp fmt --check .",
+    "test": "vp test run",
     "postinstall": "wxt prepare"
   },
   "dependencies": {
